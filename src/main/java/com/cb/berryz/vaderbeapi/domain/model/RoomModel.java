@@ -1,4 +1,4 @@
-package com.cb.berryz.vaderbeapi.controller.model;
+package com.cb.berryz.vaderbeapi.domain.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +17,15 @@ public class RoomModel {
     @ApiModelProperty(value = "ゲームID", example = "10000")
     private int gameId;
 
-    @ApiModelProperty(value = "ステータス", example = "00: 作成済、01: 対戦中、02:対戦終了")
+    @ApiModelProperty(value = "ステータス(00: 作成済、01: 対戦中、02:対戦終了)",
+            example = "00")
     private String status;
+
+    @ApiModelProperty(value = "公開フラグ", example = "true")
+    private boolean publicFlag;
+
+    @ApiModelProperty(value = "チャット表示区分(00: 全プレーヤーへ表示、01:プレーヤー以外に表示)",
+            example = "00")
+    private String chatDisplayType;
 
 }
