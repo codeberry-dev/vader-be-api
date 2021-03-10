@@ -11,8 +11,8 @@ import javax.validation.constraints.NotBlank;
 public class CreateRoomRequest {
 
     @NotBlank
-    @ApiModelProperty(value = "ゲームID", example = "00")
-    private String gameId;
+    @ApiModelProperty(value = "ゲームID", example = "10001")
+    private int gameId;
 
     @NotBlank
     @ApiModelProperty(value = "公開フラグ", example = "true")
