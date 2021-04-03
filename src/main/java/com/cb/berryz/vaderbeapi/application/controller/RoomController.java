@@ -2,6 +2,7 @@ package com.cb.berryz.vaderbeapi.application.controller;
 
 import com.cb.berryz.vaderbeapi.application.request.CreateRoomRequest;
 import com.cb.berryz.vaderbeapi.application.request.RoomStatusUpdateRequest;
+import com.cb.berryz.vaderbeapi.application.service.RoomService;
 import com.cb.berryz.vaderbeapi.domain.model.RoomModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -13,13 +14,14 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/v1/room")
+@RequestMapping(path = "/v1")
 public class RoomController {
+
+    private final RoomService roomService;
 
     /**
      * ルーム検索
@@ -32,22 +34,12 @@ public class RoomController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @GetMapping
+    @GetMapping("/{gameId}/rooms")
     @ResponseBody
-    public List<RoomModel> getAllRoom(
-            @RequestParam(name = "gameId", required = false) Integer gameId) {
+    public List<RoomModel> getAllRooms(
+            @PathVariable(name = "gameId", required = true) Integer gameId) {
 
-        // 公開フラグが立っているものだけを返す
-        // FIXME 一旦、固定値を返している
-        RoomModel roomModel = new RoomModel()
-                .setGameId(1000)
-                .setRoomId(1000)
-                .setRoomUrl("http://www.vader/room1234567890")
-                .setStatus("00")
-                .setPublicFlag(true)
-                .setChatDisplayType("00");
-
-        return Collections.singletonList(roomModel);
+        return roomService.getAllRoom(gameId);
     }
 
     /**
@@ -61,7 +53,7 @@ public class RoomController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @PostMapping
+    @PostMapping("/room")
     @ResponseBody
     public RoomModel createRoom(@RequestBody @NonNull final CreateRoomRequest request) {
 
@@ -87,7 +79,7 @@ public class RoomController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @PutMapping
+    @PutMapping("/room")
     @MessageMapping("/status")
     @SendTo("/game/match")
     @ResponseBody

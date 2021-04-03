@@ -28,7 +28,4 @@ public class RoomModel {
             example = "00")
     private String chatDisplayType;
 
-    @ApiModelProperty(value = "ゲーム進行ID", example = "100001")
-    private int gameProgressId;
-
 }
