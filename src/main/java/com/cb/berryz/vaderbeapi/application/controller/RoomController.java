@@ -57,14 +57,7 @@ public class RoomController {
     @ResponseBody
     public RoomModel createRoom(@RequestBody @NonNull final CreateRoomRequest request) {
 
-        // FIXME 一旦、固定値を返している
-        return new RoomModel()
-                .setGameId(1000)
-                .setRoomId(1000)
-                .setRoomUrl("http://www.vader/room1234567890") // ハッシュ値でBEで生成
-                .setStatus("00")
-                .setPublicFlag(true)
-                .setChatDisplayType("00");
+        return roomService.createRoom(request);
 
     }
 
@@ -85,16 +78,7 @@ public class RoomController {
     @ResponseBody
     public RoomModel updateStatus(@RequestBody @NonNull final RoomStatusUpdateRequest request) {
 
-        // FIXME 一旦、固定値を返している
-        RoomModel roomModel = new RoomModel()
-                .setGameId(1000)
-                .setRoomId(1000)
-                .setRoomUrl("http://www.vader/room1234567890")
-                .setStatus("00")
-                .setPublicFlag(true)
-                .setChatDisplayType("01");
-
-        return roomModel;
+        return roomService.updateRoom(request);
 
     }
 }

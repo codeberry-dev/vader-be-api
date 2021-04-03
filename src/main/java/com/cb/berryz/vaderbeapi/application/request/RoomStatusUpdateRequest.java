@@ -12,7 +12,7 @@ public class RoomStatusUpdateRequest {
 
     @NotBlank
     @ApiModelProperty(value = "部屋ID", example = "10000")
-    private int roomId;
+    private long roomId;
 
     @NotBlank
     @ApiModelProperty(value = "ステータス", example = "01")

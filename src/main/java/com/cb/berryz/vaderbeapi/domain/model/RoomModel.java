@@ -9,13 +9,13 @@ import lombok.experimental.Accessors;
 public class RoomModel {
 
     @ApiModelProperty(value = "部屋ID", example = "10000")
-    private int roomId;
+    private long roomId;
 
     @ApiModelProperty(value = "部屋URL", example = "http://www.vader/room1234567890")
     private String roomUrl;
 
     @ApiModelProperty(value = "ゲームID", example = "10000")
-    private int gameId;
+    private long gameId;
 
     @ApiModelProperty(value = "ステータス(00: 作成済、01: 対戦中、02:対戦終了)",
             example = "00")
