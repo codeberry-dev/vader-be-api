@@ -24,7 +24,7 @@ public class RoomService {
     }
 
     public List<RoomModel> getAllRoom(@NonNull final Integer gameId) {
-        return roomRepository.getAllRoom(gameId);
+        return roomRepository.getAllRooms(gameId);
     }
 
     public RoomModel createRoom(@NonNull final CreateRoomRequest request) {

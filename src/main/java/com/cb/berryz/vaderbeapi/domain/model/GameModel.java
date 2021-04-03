@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 public class GameModel {
 
     @ApiModelProperty(value = "ゲームID", example = "10000")
-    private int gameId;
+    private long gameId;
 
     @ApiModelProperty(value = "ゲーム名", example = "○×ゲーム")
     private String gameName;

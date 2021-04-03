@@ -21,7 +21,7 @@ public class RoomRepository {
         this.roomMapper = roomMapper;
     }
 
-    public List<RoomModel> getAllRoom(@NonNull final Integer gameId) {
+    public List<RoomModel> getAllRooms(@NonNull final Integer gameId) {
         return roomMapper.selectPublicRoomList(gameId.longValue())
                 .stream()
                 .map(this::mappingRoomModel)
