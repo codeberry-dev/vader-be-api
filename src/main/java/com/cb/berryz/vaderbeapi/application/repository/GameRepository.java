@@ -20,7 +20,7 @@ public class GameRepository {
     }
 
     public List<GameModel> getAllGames() {
-        return gameCustomMapper.select(QueryExpressionDSL::where)
+        return this.gameCustomMapper.select(QueryExpressionDSL::where)
                 .stream()
                 .map(this::mappingGameModel)
                 .collect(Collectors.toList());

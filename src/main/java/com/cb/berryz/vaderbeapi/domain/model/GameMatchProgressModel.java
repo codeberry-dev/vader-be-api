@@ -2,8 +2,10 @@ package com.cb.berryz.vaderbeapi.domain.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 public class GameMatchProgressModel {
 
     @ApiModelProperty(value = "ゲーム進行ID", example = "10001")

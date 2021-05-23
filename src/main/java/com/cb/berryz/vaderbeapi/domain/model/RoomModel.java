@@ -28,4 +28,7 @@ public class RoomModel {
             example = "00")
     private String chatDisplayType;
 
+    @ApiModelProperty(value = "ユーザーID", example = "100")
+    private String userId;
+
 }

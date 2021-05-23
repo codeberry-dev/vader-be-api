@@ -43,6 +43,12 @@ public class Room {
     private String chatDisplayType;
 
     /**
+     * Column: user_id
+     * Remark: ユーザーID
+     */
+    private String userId;
+
+    /**
      * Column: create_date
      * Remark: 作成日
      */
@@ -100,6 +106,14 @@ public class Room {
 
     public void setChatDisplayType(String chatDisplayType) {
         this.chatDisplayType = chatDisplayType == null ? null : chatDisplayType.trim();
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public Date getCreateDate() {

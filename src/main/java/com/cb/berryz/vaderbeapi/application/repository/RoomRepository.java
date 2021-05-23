@@ -22,7 +22,7 @@ public class RoomRepository {
     }
 
     public List<RoomModel> getAllRooms(@NonNull final Integer gameId) {
-        return roomMapper.selectPublicRoomList(gameId.longValue())
+        return this.roomMapper.selectPublicRoomList(gameId.longValue())
                 .stream()
                 .map(this::mappingRoomModel)
                 .collect(Collectors.toList());
@@ -30,19 +30,19 @@ public class RoomRepository {
     }
 
     public RoomModel getRoom(@NonNull final Long roomId) {
-        return this.mappingRoomModel(roomMapper.selectRoomByRoomId(roomId));
+        return this.mappingRoomModel(this.roomMapper.selectRoomByRoomId(roomId));
 
     }
 
     public RoomModel createRoom(@NonNull final RoomModel roomModel) {
-        Room roomEntity = this.mappingInitialRoomEntity(roomModel);
-        roomMapper.customInsert(roomEntity);
+        final Room roomEntity = this.mappingInitialRoomEntity(roomModel);
+        this.roomMapper.customInsert(roomEntity);
         return this.mappingRoomModel(roomEntity);
 
     }
 
     public int updateRoom(@NonNull final Long roomId, @NonNull final String status) {
-        return roomMapper.updateRoom(roomId, status);
+        return this.roomMapper.updateRoom(roomId, status);
 
     }
 

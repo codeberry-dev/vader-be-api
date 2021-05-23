@@ -22,5 +22,7 @@ public class CreateRoomRequest {
     @ApiModelProperty(value = "チャット表示区分（00:全プレーヤー, 01:プレーヤー以外に表示）", example = "00")
     private String chatDisplayType;
 
+    @ApiModelProperty(value = "ユーザーID", example = "100")
+    private String userId;
 
 }

@@ -17,20 +17,21 @@ import org.mybatis.dynamic.sql.update.UpdateModel;
 import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import static com.cb.berryz.vaderbeapi.mapper.RoomDynamicSqlSupport.*;
-import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
+import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-@Mapper
+@Repository
 public interface RoomMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    BasicColumn[] selectList = BasicColumn.columnList(roomId, roomUrl, gameId, status, publicFlag, chatDisplayType, createDate, updateDate);
+    BasicColumn[] selectList = BasicColumn.columnList(roomId, roomUrl, gameId, status, publicFlag, chatDisplayType, userId, createDate, updateDate);
 
     /**
      * @mbg.generated generated automatically, do not modify!
@@ -67,6 +68,7 @@ public interface RoomMapper {
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="public_flag", property="publicFlag", jdbcType=JdbcType.BIT),
         @Result(column="chat_display_type", property="chatDisplayType", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_date", property="updateDate", jdbcType=JdbcType.TIMESTAMP)
     })
@@ -119,6 +121,7 @@ public interface RoomMapper {
             .map(status).toProperty("status")
             .map(publicFlag).toProperty("publicFlag")
             .map(chatDisplayType).toProperty("chatDisplayType")
+            .map(userId).toProperty("userId")
             .map(createDate).toProperty("createDate")
             .map(updateDate).toProperty("updateDate")
         );
@@ -135,6 +138,7 @@ public interface RoomMapper {
             .map(status).toProperty("status")
             .map(publicFlag).toProperty("publicFlag")
             .map(chatDisplayType).toProperty("chatDisplayType")
+            .map(userId).toProperty("userId")
             .map(createDate).toProperty("createDate")
             .map(updateDate).toProperty("updateDate")
         );
@@ -151,6 +155,7 @@ public interface RoomMapper {
             .map(status).toPropertyWhenPresent("status", record::getStatus)
             .map(publicFlag).toPropertyWhenPresent("publicFlag", record::getPublicFlag)
             .map(chatDisplayType).toPropertyWhenPresent("chatDisplayType", record::getChatDisplayType)
+            .map(userId).toPropertyWhenPresent("userId", record::getUserId)
             .map(createDate).toPropertyWhenPresent("createDate", record::getCreateDate)
             .map(updateDate).toPropertyWhenPresent("updateDate", record::getUpdateDate)
         );
@@ -203,6 +208,7 @@ public interface RoomMapper {
                 .set(status).equalTo(record::getStatus)
                 .set(publicFlag).equalTo(record::getPublicFlag)
                 .set(chatDisplayType).equalTo(record::getChatDisplayType)
+                .set(userId).equalTo(record::getUserId)
                 .set(createDate).equalTo(record::getCreateDate)
                 .set(updateDate).equalTo(record::getUpdateDate);
     }
@@ -217,6 +223,7 @@ public interface RoomMapper {
                 .set(status).equalToWhenPresent(record::getStatus)
                 .set(publicFlag).equalToWhenPresent(record::getPublicFlag)
                 .set(chatDisplayType).equalToWhenPresent(record::getChatDisplayType)
+                .set(userId).equalToWhenPresent(record::getUserId)
                 .set(createDate).equalToWhenPresent(record::getCreateDate)
                 .set(updateDate).equalToWhenPresent(record::getUpdateDate);
     }
@@ -231,6 +238,7 @@ public interface RoomMapper {
             .set(status).equalTo(record::getStatus)
             .set(publicFlag).equalTo(record::getPublicFlag)
             .set(chatDisplayType).equalTo(record::getChatDisplayType)
+            .set(userId).equalTo(record::getUserId)
             .set(createDate).equalTo(record::getCreateDate)
             .set(updateDate).equalTo(record::getUpdateDate)
             .where(roomId, isEqualTo(record::getRoomId))
@@ -247,10 +255,12 @@ public interface RoomMapper {
             .set(status).equalToWhenPresent(record::getStatus)
             .set(publicFlag).equalToWhenPresent(record::getPublicFlag)
             .set(chatDisplayType).equalToWhenPresent(record::getChatDisplayType)
+            .set(userId).equalToWhenPresent(record::getUserId)
             .set(createDate).equalToWhenPresent(record::getCreateDate)
             .set(updateDate).equalToWhenPresent(record::getUpdateDate)
             .where(roomId, isEqualTo(record::getRoomId))
         );
     }
+
 
 }

@@ -10,7 +10,11 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 import java.util.List;
 
-import static com.cb.berryz.vaderbeapi.mapper.RoomDynamicSqlSupport.*;
+import static com.cb.berryz.vaderbeapi.mapper.RoomDynamicSqlSupport.gameId;
+import static com.cb.berryz.vaderbeapi.mapper.RoomDynamicSqlSupport.publicFlag;
+import static com.cb.berryz.vaderbeapi.mapper.RoomDynamicSqlSupport.roomId;
+import static com.cb.berryz.vaderbeapi.mapper.RoomDynamicSqlSupport.status;
+import static com.cb.berryz.vaderbeapi.mapper.RoomDynamicSqlSupport.updateDate;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
 @Mapper
@@ -31,6 +35,7 @@ public interface RoomCustomMapper extends RoomMapper {
             "  status," +
             "  public_flag," +
             "  chat_display_type," +
+            "  user_id," +
             "  create_date," +
             "  update_date" +
             ") values (" +
@@ -39,6 +44,7 @@ public interface RoomCustomMapper extends RoomMapper {
             "  #{room.status}," +
             "  #{room.publicFlag}," +
             "  #{room.chatDisplayType}," +
+            "  #{room.userId}," +
             "  #{room.createDate}," +
             "  #{room.updateDate})")
     @Options(useGeneratedKeys=true, keyColumn="room_id", keyProperty="roomId")
