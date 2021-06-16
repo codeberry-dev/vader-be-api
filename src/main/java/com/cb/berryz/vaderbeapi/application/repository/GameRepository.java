@@ -4,6 +4,7 @@ import com.cb.berryz.vaderbeapi.domain.model.GameModel;
 import com.cb.berryz.vaderbeapi.entity.Game;
 import com.cb.berryz.vaderbeapi.mapper.custom.GameCustomMapper;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.mybatis.dynamic.sql.select.QueryExpressionDSL;
 import org.springframework.stereotype.Repository;
 
@@ -11,13 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
+@RequiredArgsConstructor
 public class GameRepository {
 
     private final GameCustomMapper gameCustomMapper;
-
-    public GameRepository(GameCustomMapper gameCustomMapper) {
-        this.gameCustomMapper = gameCustomMapper;
-    }
 
     public List<GameModel> getAllGames() {
         return this.gameCustomMapper.select(QueryExpressionDSL::where)

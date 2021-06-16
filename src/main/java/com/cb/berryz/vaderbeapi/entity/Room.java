@@ -46,7 +46,7 @@ public class Room {
      * Column: user_id
      * Remark: ユーザーID
      */
-    private String userId;
+    private Long userId;
 
     /**
      * Column: create_date
@@ -108,12 +108,12 @@ public class Room {
         this.chatDisplayType = chatDisplayType == null ? null : chatDisplayType.trim();
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Date getCreateDate() {

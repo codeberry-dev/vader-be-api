@@ -4,6 +4,7 @@ import com.cb.berryz.vaderbeapi.domain.model.RoomModel;
 import com.cb.berryz.vaderbeapi.entity.Room;
 import com.cb.berryz.vaderbeapi.mapper.custom.RoomCustomMapper;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -11,15 +12,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
+@RequiredArgsConstructor
 public class RoomRepository {
 
     private final RoomCustomMapper roomMapper;
 
     private static final String GAME_STATUS_CREATED = "00";
-
-    public RoomRepository(RoomCustomMapper roomMapper) {
-        this.roomMapper = roomMapper;
-    }
 
     public List<RoomModel> getAllRooms(@NonNull final Integer gameId) {
         return this.roomMapper.selectPublicRoomList(gameId.longValue())

@@ -37,7 +37,7 @@ public class GameController {
     @GetMapping
     @ResponseBody
     public List<GameModel> getAllGames() {
-        return gameService.getAllGames();
+        return this.gameService.getAllGames();
     }
 
     /**
@@ -56,13 +56,42 @@ public class GameController {
     @SendTo("/game/match")
     @ResponseBody
     public GameMatchProgressModel postGame(@RequestBody @NonNull final GameMatchProgressRequest request) {
+        return this.gameService.updateGameProgress(request);
 
-        GameMatchProgressModel model = new GameMatchProgressModel();
-        model.setGameProgressId(100001);
-        model.setRoomId(1000);
-        model.setGameProgressInfo("{\"user\":\"A\", \"maruBatsu\":\"maru\"}");
-        return model;
+    }
 
+    /**
+     * ゲーム進行取得API
+     *
+     * @return ゲーム進行情報
+     */
+    @ApiOperation(value = "ゲーム進行取得API",
+            notes = "ゲーム進行情報を取得する",
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses({
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @GetMapping("/progress/{gameProgressId}")
+    @ResponseBody
+    public GameMatchProgressModel getGameProgress(@NonNull final Long gameProgressId) {
+        return this.gameService.getGameProgress(gameProgressId);
+    }
+
+    /**
+     * ゲーム進行登録API
+     *
+     * @return ゲーム進行情報
+     */
+    @ApiOperation(value = "ゲーム進行登録API",
+            notes = "ゲーム進行情報を登録する",
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses({
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @PostMapping("/progress")
+    @ResponseBody
+    public GameMatchProgressModel createGameProgress(@RequestBody @NonNull final GameMatchProgressRequest request) {
+        return this.gameService.createGameProgress(request);
     }
 
 }

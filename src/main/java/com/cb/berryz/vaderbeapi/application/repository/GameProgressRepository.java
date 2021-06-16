@@ -4,18 +4,16 @@ import com.cb.berryz.vaderbeapi.domain.model.GameMatchProgressModel;
 import com.cb.berryz.vaderbeapi.entity.GameProgress;
 import com.cb.berryz.vaderbeapi.mapper.custom.GameProgressCustomMapper;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 
 @Repository
+@RequiredArgsConstructor
 public class GameProgressRepository {
 
     private final GameProgressCustomMapper gameProgressCustomMapper;
-
-    public GameProgressRepository(GameProgressCustomMapper gameProgressCustomMapper) {
-        this.gameProgressCustomMapper = gameProgressCustomMapper;
-    }
 
     public int updateGameProgress(
             @NonNull final long gameProgressId, @NonNull final String gameProgressInfo) {

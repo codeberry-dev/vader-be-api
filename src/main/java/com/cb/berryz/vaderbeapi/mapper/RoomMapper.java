@@ -68,7 +68,7 @@ public interface RoomMapper {
         @Result(column="status", property="status", jdbcType=JdbcType.VARCHAR),
         @Result(column="public_flag", property="publicFlag", jdbcType=JdbcType.BIT),
         @Result(column="chat_display_type", property="chatDisplayType", jdbcType=JdbcType.VARCHAR),
-        @Result(column="user_id", property="userId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_date", property="updateDate", jdbcType=JdbcType.TIMESTAMP)
     })

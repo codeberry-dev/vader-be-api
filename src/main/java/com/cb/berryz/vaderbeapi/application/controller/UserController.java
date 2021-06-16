@@ -1,6 +1,7 @@
 package com.cb.berryz.vaderbeapi.application.controller;
 
 import com.cb.berryz.vaderbeapi.application.request.UserRequest;
+import com.cb.berryz.vaderbeapi.application.service.UserService;
 import com.cb.berryz.vaderbeapi.domain.model.UserModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(path = "/v1/user")
 public class UserController {
+
+    private final UserService userService;
 
     /**
      * ユーザー登録
@@ -30,14 +33,8 @@ public class UserController {
     @ResponseBody
     public UserModel createUser(@RequestBody @NonNull final UserRequest request) {
 
-        // 公開フラグが立っているものだけを返す
-        // FIXME 一旦、固定値を返している
-        UserModel model = new UserModel()
-                .setUserId(10001)
-                .setUserName("太郎")
-                .setGoogleId("Google123");
+        return this.userService.createGameUser(request);
 
-        return model;
     }
 
 }

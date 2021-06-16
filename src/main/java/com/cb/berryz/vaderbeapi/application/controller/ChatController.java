@@ -1,6 +1,7 @@
 package com.cb.berryz.vaderbeapi.application.controller;
 
 import com.cb.berryz.vaderbeapi.application.request.ChatMessageRequest;
+import com.cb.berryz.vaderbeapi.application.service.ChatService;
 import com.cb.berryz.vaderbeapi.domain.model.ChatModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,15 +12,21 @@ import org.springframework.http.MediaType;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping(path = "/v1/chat")
 public class ChatController {
+
+    private final ChatService chatService;
 
     /**
      * チャットAPI
@@ -38,12 +45,7 @@ public class ChatController {
     @ResponseBody
     public ChatModel postMessage(@RequestBody @NonNull final ChatMessageRequest request) {
 
-        ChatModel chatModel = new ChatModel();
-        chatModel.setRoomId(1000);
-        chatModel.setMessage("こんにちは！");
-        chatModel.setUserId(1000);
-        chatModel.setUserName("ユーザーA");
-        return chatModel;
+        return this.chatService.createChat(request);
 
     }
 
@@ -58,22 +60,11 @@ public class ChatController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @GetMapping
+    @GetMapping("/{roomId}")
     @ResponseBody
-    public List<ChatModel> getChatInfo(
-            @RequestParam(name = "roomId", required = false) Integer roomId) {
+    public List<ChatModel> getChatInfo(@RequestParam(name = "roomId", required = false) Integer roomId) {
 
-        ChatModel chatModel1 = new ChatModel();
-        chatModel1.setMessage("こんにちは！");
-        chatModel1.setUserId(1000);
-        chatModel1.setUserName("ユーザーA");
-
-        ChatModel chatModel2 = new ChatModel();
-        chatModel2.setMessage("はじめまして！");
-        chatModel2.setUserId(2000);
-        chatModel2.setUserName("ユーザーB");
-
-        return Arrays.asList(chatModel1, chatModel2);
+        return this.chatService.getChat(roomId);
 
     }
 

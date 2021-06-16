@@ -2,12 +2,14 @@ package com.cb.berryz.vaderbeapi.domain.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 public class ChatModel {
 
     @ApiModelProperty(value = "部屋ID", example = "5000")
-    private Integer roomId;
+    private long roomId;
 
     @ApiModelProperty(value = "ユーザー名", example = "ユーザーA")
     private String userName;
@@ -16,7 +18,7 @@ public class ChatModel {
     private String message;
 
     @ApiModelProperty(value = "ユーザーID", example = "1000")
-    private Integer userId;
+    private long userId;
 
     public ChatModel() {
     }

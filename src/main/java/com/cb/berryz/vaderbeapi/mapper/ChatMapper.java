@@ -1,6 +1,6 @@
 package com.cb.berryz.vaderbeapi.mapper;
 
-import com.cb.berryz.vaderbeapi.entity.GameProgress;
+import com.cb.berryz.vaderbeapi.entity.Chat;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Result;
@@ -29,20 +29,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.createDate;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.gameProgress;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.gameProgressId;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.gameProgressInfo;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.roomId;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.updateDate;
-import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
+import static com.cb.berryz.vaderbeapi.mapper.ChatDynamicSqlSupport.*;
+import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 @Repository
-public interface GameProgressMapper {
+public interface ChatMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    BasicColumn[] selectList = BasicColumn.columnList(gameProgressId, roomId, gameProgressInfo, createDate, updateDate);
+    BasicColumn[] selectList = BasicColumn.columnList(chatId, roomId, userId, text, createDate);
 
     /**
      * @mbg.generated generated automatically, do not modify!
@@ -60,33 +55,33 @@ public interface GameProgressMapper {
      * @mbg.generated generated automatically, do not modify!
      */
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
-    int insert(InsertStatementProvider<GameProgress> insertStatement);
+    int insert(InsertStatementProvider<Chat> insertStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     @InsertProvider(type=SqlProviderAdapter.class, method="insertMultiple")
-    int insertMultiple(MultiRowInsertStatementProvider<GameProgress> multipleInsertStatement);
+    int insertMultiple(MultiRowInsertStatementProvider<Chat> multipleInsertStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @Results(id="GameProgressResult", value = {
-        @Result(column="game_progress_id", property="gameProgressId", jdbcType=JdbcType.BIGINT, id=true),
+    @Results(id="ChatResult", value = {
+        @Result(column="chat_id", property="chatId", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="room_id", property="roomId", jdbcType=JdbcType.BIGINT),
-        @Result(column="game_progress_info", property="gameProgressInfo", jdbcType=JdbcType.VARCHAR),
-        @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
-        @Result(column="update_date", property="updateDate", jdbcType=JdbcType.TIMESTAMP)
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT),
+        @Result(column="text", property="text", jdbcType=JdbcType.VARCHAR),
+        @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<GameProgress> selectMany(SelectStatementProvider selectStatement);
+    List<Chat> selectMany(SelectStatementProvider selectStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @ResultMap("GameProgressResult")
-    Optional<GameProgress> selectOne(SelectStatementProvider selectStatement);
+    @ResultMap("ChatResult")
+    Optional<Chat> selectOne(SelectStatementProvider selectStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
@@ -98,91 +93,91 @@ public interface GameProgressMapper {
      * @mbg.generated generated automatically, do not modify!
      */
     default long count(CountDSLCompleter completer) {
-        return MyBatis3Utils.countFrom(this::count, gameProgress, completer);
+        return MyBatis3Utils.countFrom(this::count, chat, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     default int delete(DeleteDSLCompleter completer) {
-        return MyBatis3Utils.deleteFrom(this::delete, gameProgress, completer);
+        return MyBatis3Utils.deleteFrom(this::delete, chat, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int deleteByPrimaryKey(Long gameProgressId_) {
+    default int deleteByPrimaryKey(Long chatId_) {
         return delete(c -> 
-            c.where(gameProgressId, isEqualTo(gameProgressId_))
+            c.where(chatId, isEqualTo(chatId_))
         );
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int insert(GameProgress record) {
-        return MyBatis3Utils.insert(this::insert, record, gameProgress, c ->
-            c.map(gameProgressId).toProperty("gameProgressId")
+    default int insert(Chat record) {
+        return MyBatis3Utils.insert(this::insert, record, chat, c ->
+            c.map(chatId).toProperty("chatId")
             .map(roomId).toProperty("roomId")
-            .map(gameProgressInfo).toProperty("gameProgressInfo")
+            .map(userId).toProperty("userId")
+            .map(text).toProperty("text")
             .map(createDate).toProperty("createDate")
-            .map(updateDate).toProperty("updateDate")
         );
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int insertMultiple(Collection<GameProgress> records) {
-        return MyBatis3Utils.insertMultiple(this::insertMultiple, records, gameProgress, c ->
-            c.map(gameProgressId).toProperty("gameProgressId")
+    default int insertMultiple(Collection<Chat> records) {
+        return MyBatis3Utils.insertMultiple(this::insertMultiple, records, chat, c ->
+            c.map(chatId).toProperty("chatId")
             .map(roomId).toProperty("roomId")
-            .map(gameProgressInfo).toProperty("gameProgressInfo")
+            .map(userId).toProperty("userId")
+            .map(text).toProperty("text")
             .map(createDate).toProperty("createDate")
-            .map(updateDate).toProperty("updateDate")
         );
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int insertSelective(GameProgress record) {
-        return MyBatis3Utils.insert(this::insert, record, gameProgress, c ->
-            c.map(gameProgressId).toPropertyWhenPresent("gameProgressId", record::getGameProgressId)
+    default int insertSelective(Chat record) {
+        return MyBatis3Utils.insert(this::insert, record, chat, c ->
+            c.map(chatId).toPropertyWhenPresent("chatId", record::getChatId)
             .map(roomId).toPropertyWhenPresent("roomId", record::getRoomId)
-            .map(gameProgressInfo).toPropertyWhenPresent("gameProgressInfo", record::getGameProgressInfo)
+            .map(userId).toPropertyWhenPresent("userId", record::getUserId)
+            .map(text).toPropertyWhenPresent("text", record::getText)
             .map(createDate).toPropertyWhenPresent("createDate", record::getCreateDate)
-            .map(updateDate).toPropertyWhenPresent("updateDate", record::getUpdateDate)
         );
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default Optional<GameProgress> selectOne(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectOne(this::selectOne, selectList, gameProgress, completer);
+    default Optional<Chat> selectOne(SelectDSLCompleter completer) {
+        return MyBatis3Utils.selectOne(this::selectOne, selectList, chat, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default List<GameProgress> select(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectList(this::selectMany, selectList, gameProgress, completer);
+    default List<Chat> select(SelectDSLCompleter completer) {
+        return MyBatis3Utils.selectList(this::selectMany, selectList, chat, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default List<GameProgress> selectDistinct(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectDistinct(this::selectMany, selectList, gameProgress, completer);
+    default List<Chat> selectDistinct(SelectDSLCompleter completer) {
+        return MyBatis3Utils.selectDistinct(this::selectMany, selectList, chat, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default Optional<GameProgress> selectByPrimaryKey(Long gameProgressId_) {
+    default Optional<Chat> selectByPrimaryKey(Long chatId_) {
         return selectOne(c ->
-            c.where(gameProgressId, isEqualTo(gameProgressId_))
+            c.where(chatId, isEqualTo(chatId_))
         );
     }
 
@@ -190,54 +185,54 @@ public interface GameProgressMapper {
      * @mbg.generated generated automatically, do not modify!
      */
     default int update(UpdateDSLCompleter completer) {
-        return MyBatis3Utils.update(this::update, gameProgress, completer);
+        return MyBatis3Utils.update(this::update, chat, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    static UpdateDSL<UpdateModel> updateAllColumns(GameProgress record, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(gameProgressId).equalTo(record::getGameProgressId)
+    static UpdateDSL<UpdateModel> updateAllColumns(Chat record, UpdateDSL<UpdateModel> dsl) {
+        return dsl.set(chatId).equalTo(record::getChatId)
                 .set(roomId).equalTo(record::getRoomId)
-                .set(gameProgressInfo).equalTo(record::getGameProgressInfo)
-                .set(createDate).equalTo(record::getCreateDate)
-                .set(updateDate).equalTo(record::getUpdateDate);
+                .set(userId).equalTo(record::getUserId)
+                .set(text).equalTo(record::getText)
+                .set(createDate).equalTo(record::getCreateDate);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    static UpdateDSL<UpdateModel> updateSelectiveColumns(GameProgress record, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(gameProgressId).equalToWhenPresent(record::getGameProgressId)
+    static UpdateDSL<UpdateModel> updateSelectiveColumns(Chat record, UpdateDSL<UpdateModel> dsl) {
+        return dsl.set(chatId).equalToWhenPresent(record::getChatId)
                 .set(roomId).equalToWhenPresent(record::getRoomId)
-                .set(gameProgressInfo).equalToWhenPresent(record::getGameProgressInfo)
-                .set(createDate).equalToWhenPresent(record::getCreateDate)
-                .set(updateDate).equalToWhenPresent(record::getUpdateDate);
+                .set(userId).equalToWhenPresent(record::getUserId)
+                .set(text).equalToWhenPresent(record::getText)
+                .set(createDate).equalToWhenPresent(record::getCreateDate);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int updateByPrimaryKey(GameProgress record) {
+    default int updateByPrimaryKey(Chat record) {
         return update(c ->
             c.set(roomId).equalTo(record::getRoomId)
-            .set(gameProgressInfo).equalTo(record::getGameProgressInfo)
+            .set(userId).equalTo(record::getUserId)
+            .set(text).equalTo(record::getText)
             .set(createDate).equalTo(record::getCreateDate)
-            .set(updateDate).equalTo(record::getUpdateDate)
-            .where(gameProgressId, isEqualTo(record::getGameProgressId))
+            .where(chatId, isEqualTo(record::getChatId))
         );
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int updateByPrimaryKeySelective(GameProgress record) {
+    default int updateByPrimaryKeySelective(Chat record) {
         return update(c ->
             c.set(roomId).equalToWhenPresent(record::getRoomId)
-            .set(gameProgressInfo).equalToWhenPresent(record::getGameProgressInfo)
+            .set(userId).equalToWhenPresent(record::getUserId)
+            .set(text).equalToWhenPresent(record::getText)
             .set(createDate).equalToWhenPresent(record::getCreateDate)
-            .set(updateDate).equalToWhenPresent(record::getUpdateDate)
-            .where(gameProgressId, isEqualTo(record::getGameProgressId))
+            .where(chatId, isEqualTo(record::getChatId))
         );
     }
 }

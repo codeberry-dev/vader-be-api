@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 public class UserModel {
 
     @ApiModelProperty(value = "ユーザーID", example = "10001")
-    private int userId;
+    private long userId;
 
     @ApiModelProperty(value = "ユーザー名", example = "太郎")
     private String userName;

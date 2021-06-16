@@ -5,6 +5,7 @@ import com.cb.berryz.vaderbeapi.application.request.CreateRoomRequest;
 import com.cb.berryz.vaderbeapi.application.request.RoomStatusUpdateRequest;
 import com.cb.berryz.vaderbeapi.domain.model.RoomModel;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +13,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
     private final RoomRepository roomRepository;
 
     @Value("${app.vader.room.baseurl}")
     private String baseRoomUrl;
-
-    public RoomService(RoomRepository roomRepository) {
-        this.roomRepository = roomRepository;
-    }
 
     public List<RoomModel> getAllRoom(@NonNull final Integer gameId) {
         return roomRepository.getAllRooms(gameId);

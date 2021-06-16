@@ -1,6 +1,6 @@
 package com.cb.berryz.vaderbeapi.mapper;
 
-import com.cb.berryz.vaderbeapi.entity.GameProgress;
+import com.cb.berryz.vaderbeapi.entity.GameUser;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Result;
@@ -29,20 +29,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.createDate;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.gameProgress;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.gameProgressId;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.gameProgressInfo;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.roomId;
-import static com.cb.berryz.vaderbeapi.mapper.GameProgressDynamicSqlSupport.updateDate;
-import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
+import static com.cb.berryz.vaderbeapi.mapper.GameUserDynamicSqlSupport.*;
+import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 @Repository
-public interface GameProgressMapper {
+public interface GameUserMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    BasicColumn[] selectList = BasicColumn.columnList(gameProgressId, roomId, gameProgressInfo, createDate, updateDate);
+    BasicColumn[] selectList = BasicColumn.columnList(userId, userName, googleId, lastUsageDate, createDate, updateDate);
 
     /**
      * @mbg.generated generated automatically, do not modify!
@@ -60,33 +55,34 @@ public interface GameProgressMapper {
      * @mbg.generated generated automatically, do not modify!
      */
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
-    int insert(InsertStatementProvider<GameProgress> insertStatement);
+    int insert(InsertStatementProvider<GameUser> insertStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     @InsertProvider(type=SqlProviderAdapter.class, method="insertMultiple")
-    int insertMultiple(MultiRowInsertStatementProvider<GameProgress> multipleInsertStatement);
+    int insertMultiple(MultiRowInsertStatementProvider<GameUser> multipleInsertStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @Results(id="GameProgressResult", value = {
-        @Result(column="game_progress_id", property="gameProgressId", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="room_id", property="roomId", jdbcType=JdbcType.BIGINT),
-        @Result(column="game_progress_info", property="gameProgressInfo", jdbcType=JdbcType.VARCHAR),
+    @Results(id="GameUserResult", value = {
+        @Result(column="user_id", property="userId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="user_name", property="userName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="google_id", property="googleId", jdbcType=JdbcType.VARCHAR),
+        @Result(column="last_usage_date", property="lastUsageDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="create_date", property="createDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="update_date", property="updateDate", jdbcType=JdbcType.TIMESTAMP)
     })
-    List<GameProgress> selectMany(SelectStatementProvider selectStatement);
+    List<GameUser> selectMany(SelectStatementProvider selectStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @ResultMap("GameProgressResult")
-    Optional<GameProgress> selectOne(SelectStatementProvider selectStatement);
+    @ResultMap("GameUserResult")
+    Optional<GameUser> selectOne(SelectStatementProvider selectStatement);
 
     /**
      * @mbg.generated generated automatically, do not modify!
@@ -98,33 +94,34 @@ public interface GameProgressMapper {
      * @mbg.generated generated automatically, do not modify!
      */
     default long count(CountDSLCompleter completer) {
-        return MyBatis3Utils.countFrom(this::count, gameProgress, completer);
+        return MyBatis3Utils.countFrom(this::count, gameUser, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
     default int delete(DeleteDSLCompleter completer) {
-        return MyBatis3Utils.deleteFrom(this::delete, gameProgress, completer);
+        return MyBatis3Utils.deleteFrom(this::delete, gameUser, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int deleteByPrimaryKey(Long gameProgressId_) {
+    default int deleteByPrimaryKey(Long userId_) {
         return delete(c -> 
-            c.where(gameProgressId, isEqualTo(gameProgressId_))
+            c.where(userId, isEqualTo(userId_))
         );
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int insert(GameProgress record) {
-        return MyBatis3Utils.insert(this::insert, record, gameProgress, c ->
-            c.map(gameProgressId).toProperty("gameProgressId")
-            .map(roomId).toProperty("roomId")
-            .map(gameProgressInfo).toProperty("gameProgressInfo")
+    default int insert(GameUser record) {
+        return MyBatis3Utils.insert(this::insert, record, gameUser, c ->
+            c.map(userId).toProperty("userId")
+            .map(userName).toProperty("userName")
+            .map(googleId).toProperty("googleId")
+            .map(lastUsageDate).toProperty("lastUsageDate")
             .map(createDate).toProperty("createDate")
             .map(updateDate).toProperty("updateDate")
         );
@@ -133,11 +130,12 @@ public interface GameProgressMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int insertMultiple(Collection<GameProgress> records) {
-        return MyBatis3Utils.insertMultiple(this::insertMultiple, records, gameProgress, c ->
-            c.map(gameProgressId).toProperty("gameProgressId")
-            .map(roomId).toProperty("roomId")
-            .map(gameProgressInfo).toProperty("gameProgressInfo")
+    default int insertMultiple(Collection<GameUser> records) {
+        return MyBatis3Utils.insertMultiple(this::insertMultiple, records, gameUser, c ->
+            c.map(userId).toProperty("userId")
+            .map(userName).toProperty("userName")
+            .map(googleId).toProperty("googleId")
+            .map(lastUsageDate).toProperty("lastUsageDate")
             .map(createDate).toProperty("createDate")
             .map(updateDate).toProperty("updateDate")
         );
@@ -146,11 +144,12 @@ public interface GameProgressMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int insertSelective(GameProgress record) {
-        return MyBatis3Utils.insert(this::insert, record, gameProgress, c ->
-            c.map(gameProgressId).toPropertyWhenPresent("gameProgressId", record::getGameProgressId)
-            .map(roomId).toPropertyWhenPresent("roomId", record::getRoomId)
-            .map(gameProgressInfo).toPropertyWhenPresent("gameProgressInfo", record::getGameProgressInfo)
+    default int insertSelective(GameUser record) {
+        return MyBatis3Utils.insert(this::insert, record, gameUser, c ->
+            c.map(userId).toPropertyWhenPresent("userId", record::getUserId)
+            .map(userName).toPropertyWhenPresent("userName", record::getUserName)
+            .map(googleId).toPropertyWhenPresent("googleId", record::getGoogleId)
+            .map(lastUsageDate).toPropertyWhenPresent("lastUsageDate", record::getLastUsageDate)
             .map(createDate).toPropertyWhenPresent("createDate", record::getCreateDate)
             .map(updateDate).toPropertyWhenPresent("updateDate", record::getUpdateDate)
         );
@@ -159,30 +158,30 @@ public interface GameProgressMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default Optional<GameProgress> selectOne(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectOne(this::selectOne, selectList, gameProgress, completer);
+    default Optional<GameUser> selectOne(SelectDSLCompleter completer) {
+        return MyBatis3Utils.selectOne(this::selectOne, selectList, gameUser, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default List<GameProgress> select(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectList(this::selectMany, selectList, gameProgress, completer);
+    default List<GameUser> select(SelectDSLCompleter completer) {
+        return MyBatis3Utils.selectList(this::selectMany, selectList, gameUser, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default List<GameProgress> selectDistinct(SelectDSLCompleter completer) {
-        return MyBatis3Utils.selectDistinct(this::selectMany, selectList, gameProgress, completer);
+    default List<GameUser> selectDistinct(SelectDSLCompleter completer) {
+        return MyBatis3Utils.selectDistinct(this::selectMany, selectList, gameUser, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default Optional<GameProgress> selectByPrimaryKey(Long gameProgressId_) {
+    default Optional<GameUser> selectByPrimaryKey(Long userId_) {
         return selectOne(c ->
-            c.where(gameProgressId, isEqualTo(gameProgressId_))
+            c.where(userId, isEqualTo(userId_))
         );
     }
 
@@ -190,16 +189,17 @@ public interface GameProgressMapper {
      * @mbg.generated generated automatically, do not modify!
      */
     default int update(UpdateDSLCompleter completer) {
-        return MyBatis3Utils.update(this::update, gameProgress, completer);
+        return MyBatis3Utils.update(this::update, gameUser, completer);
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    static UpdateDSL<UpdateModel> updateAllColumns(GameProgress record, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(gameProgressId).equalTo(record::getGameProgressId)
-                .set(roomId).equalTo(record::getRoomId)
-                .set(gameProgressInfo).equalTo(record::getGameProgressInfo)
+    static UpdateDSL<UpdateModel> updateAllColumns(GameUser record, UpdateDSL<UpdateModel> dsl) {
+        return dsl.set(userId).equalTo(record::getUserId)
+                .set(userName).equalTo(record::getUserName)
+                .set(googleId).equalTo(record::getGoogleId)
+                .set(lastUsageDate).equalTo(record::getLastUsageDate)
                 .set(createDate).equalTo(record::getCreateDate)
                 .set(updateDate).equalTo(record::getUpdateDate);
     }
@@ -207,10 +207,11 @@ public interface GameProgressMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    static UpdateDSL<UpdateModel> updateSelectiveColumns(GameProgress record, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(gameProgressId).equalToWhenPresent(record::getGameProgressId)
-                .set(roomId).equalToWhenPresent(record::getRoomId)
-                .set(gameProgressInfo).equalToWhenPresent(record::getGameProgressInfo)
+    static UpdateDSL<UpdateModel> updateSelectiveColumns(GameUser record, UpdateDSL<UpdateModel> dsl) {
+        return dsl.set(userId).equalToWhenPresent(record::getUserId)
+                .set(userName).equalToWhenPresent(record::getUserName)
+                .set(googleId).equalToWhenPresent(record::getGoogleId)
+                .set(lastUsageDate).equalToWhenPresent(record::getLastUsageDate)
                 .set(createDate).equalToWhenPresent(record::getCreateDate)
                 .set(updateDate).equalToWhenPresent(record::getUpdateDate);
     }
@@ -218,26 +219,30 @@ public interface GameProgressMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int updateByPrimaryKey(GameProgress record) {
+    default int updateByPrimaryKey(GameUser record) {
         return update(c ->
-            c.set(roomId).equalTo(record::getRoomId)
-            .set(gameProgressInfo).equalTo(record::getGameProgressInfo)
+            c.set(userName).equalTo(record::getUserName)
+            .set(googleId).equalTo(record::getGoogleId)
+            .set(lastUsageDate).equalTo(record::getLastUsageDate)
             .set(createDate).equalTo(record::getCreateDate)
             .set(updateDate).equalTo(record::getUpdateDate)
-            .where(gameProgressId, isEqualTo(record::getGameProgressId))
+            .where(userId, isEqualTo(record::getUserId))
         );
     }
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    default int updateByPrimaryKeySelective(GameProgress record) {
+    default int updateByPrimaryKeySelective(GameUser record) {
         return update(c ->
-            c.set(roomId).equalToWhenPresent(record::getRoomId)
-            .set(gameProgressInfo).equalToWhenPresent(record::getGameProgressInfo)
+            c.set(userName).equalToWhenPresent(record::getUserName)
+            .set(googleId).equalToWhenPresent(record::getGoogleId)
+            .set(lastUsageDate).equalToWhenPresent(record::getLastUsageDate)
             .set(createDate).equalToWhenPresent(record::getCreateDate)
             .set(updateDate).equalToWhenPresent(record::getUpdateDate)
-            .where(gameProgressId, isEqualTo(record::getGameProgressId))
+            .where(userId, isEqualTo(record::getUserId))
         );
     }
+
+
 }

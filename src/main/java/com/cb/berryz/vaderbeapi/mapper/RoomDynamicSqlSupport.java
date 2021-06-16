@@ -1,9 +1,10 @@
 package com.cb.berryz.vaderbeapi.mapper;
 
-import java.sql.JDBCType;
-import java.util.Date;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
+
+import java.sql.JDBCType;
+import java.util.Date;
 
 public final class RoomDynamicSqlSupport {
     public static final Room room = new Room();
@@ -20,7 +21,7 @@ public final class RoomDynamicSqlSupport {
 
     public static final SqlColumn<String> chatDisplayType = room.chatDisplayType;
 
-    public static final SqlColumn<String> userId = room.userId;
+    public static final SqlColumn<Long> userId = room.userId;
 
     public static final SqlColumn<Date> createDate = room.createDate;
 
@@ -39,7 +40,7 @@ public final class RoomDynamicSqlSupport {
 
         public final SqlColumn<String> chatDisplayType = column("chat_display_type", JDBCType.VARCHAR);
 
-        public final SqlColumn<String> userId = column("user_id", JDBCType.VARCHAR);
+        public final SqlColumn<Long> userId = column("user_id", JDBCType.BIGINT);
 
         public final SqlColumn<Date> createDate = column("create_date", JDBCType.TIMESTAMP);
 
