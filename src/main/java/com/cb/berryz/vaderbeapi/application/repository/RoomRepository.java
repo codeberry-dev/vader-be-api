@@ -60,6 +60,7 @@ public class RoomRepository {
         room.setRoomId(roomModel.getRoomId());
         room.setRoomUrl(roomModel.getRoomUrl());
         room.setGameId(roomModel.getGameId());
+        room.setUserId(roomModel.getUserId());
         room.setStatus(GAME_STATUS_CREATED);
         room.setPublicFlag(roomModel.isPublicFlag());
         room.setChatDisplayType(roomModel.getChatDisplayType());

@@ -23,6 +23,6 @@ public class CreateRoomRequest {
     private String chatDisplayType;
 
     @ApiModelProperty(value = "ユーザーID", example = "100")
-    private String userId;
+    private int userId;
 
 }

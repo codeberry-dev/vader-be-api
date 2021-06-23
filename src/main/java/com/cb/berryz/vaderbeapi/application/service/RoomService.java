@@ -30,7 +30,10 @@ public class RoomService {
     }
 
     public RoomModel updateRoom(@NonNull final RoomStatusUpdateRequest request) {
-        roomRepository.updateRoom(request.getRoomId(), request.getStatus());
+        final int result = roomRepository.updateRoom(request.getRoomId(), request.getStatus());
+        if (result == 0) {
+            return new RoomModel();
+        }
         return roomRepository.getRoom(request.getRoomId());
     }
 
@@ -39,7 +42,8 @@ public class RoomService {
                 .setRoomUrl(this.generateGameUrl()) // ハッシュ値を生成する
                 .setGameId(request.getGameId())
                 .setPublicFlag(request.isPublicFlag())
-                .setChatDisplayType(request.getChatDisplayType());
+                .setChatDisplayType(request.getChatDisplayType())
+                .setUserId(request.getUserId());
     }
 
     private String generateGameUrl() {

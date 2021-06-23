@@ -51,7 +51,7 @@ public class GameController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @PostMapping
+    @PostMapping("/post")
     @MessageMapping("/postgame")
     @SendTo("/game/match")
     @ResponseBody
@@ -73,7 +73,8 @@ public class GameController {
     })
     @GetMapping("/progress/{gameProgressId}")
     @ResponseBody
-    public GameMatchProgressModel getGameProgress(@NonNull final Long gameProgressId) {
+    public GameMatchProgressModel getGameProgress(
+            @PathVariable(name = "gameProgressId", required = true) @NonNull final Long gameProgressId) {
         return this.gameService.getGameProgress(gameProgressId);
     }
 

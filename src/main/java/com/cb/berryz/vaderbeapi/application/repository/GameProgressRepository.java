@@ -21,7 +21,7 @@ public class GameProgressRepository {
     }
 
     public GameMatchProgressModel createGameProgress(@NonNull final GameMatchProgressModel model) {
-        final GameProgress entity = this.mappingEntity(model);
+        final GameProgress entity = this.mappingEntityForCreate(model);
         this.gameProgressCustomMapper.customInsert(entity);
         return this.mappingRoomModel(entity);
 
@@ -39,12 +39,12 @@ public class GameProgressRepository {
 
     }
 
-    private GameProgress mappingEntity(@NonNull final GameMatchProgressModel model) {
+    private GameProgress mappingEntityForCreate(@NonNull final GameMatchProgressModel model) {
         GameProgress entity = new GameProgress();
-        entity.setGameProgressId((long) model.getGameProgressId());
         entity.setRoomId((long) model.getRoomId());
         entity.setGameProgressInfo(model.getGameProgressInfo());
         entity.setUpdateDate(new Date());
+        entity.setCreateDate(new Date());
         return entity;
 
     }

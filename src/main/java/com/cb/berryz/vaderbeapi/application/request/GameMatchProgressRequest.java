@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 public class GameMatchProgressRequest {
 
     @ApiModelProperty(value = "ゲーム進行ID", example = "10001")
-    private int gameProgressId;
+    private Integer gameProgressId;
 
     @ApiModelProperty(value = "部屋ID", example = "10001")
     private int roomId;

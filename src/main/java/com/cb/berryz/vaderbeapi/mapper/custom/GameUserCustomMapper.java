@@ -15,7 +15,7 @@ public interface GameUserCustomMapper extends GameUserMapper {
 
     // Mybatis3のinsertを使うと、
     // なぜかオートインクリメントされたIDを設定できなかったので仕方なくinsertベタがき。
-    @Insert("insert into chat (" +
+    @Insert("insert into game_user (" +
             "  user_id," +
             "  user_name," +
             "  google_id," +
@@ -28,7 +28,7 @@ public interface GameUserCustomMapper extends GameUserMapper {
             "  #{gameUser.googleId}," +
             "  #{gameUser.lastUsageDate}," +
             "  #{gameUser.createDate}," +
-            "  #{gameUser.updateDate}")
+            "  #{gameUser.updateDate})")
     @Options(useGeneratedKeys=true, keyColumn="user_id", keyProperty="userId")
     int customInsert(@Param("gameUser") GameUser gameUser);
 

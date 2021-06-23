@@ -24,7 +24,6 @@ public class GameService {
 
     public GameMatchProgressModel createGameProgress(@NonNull final GameMatchProgressRequest request) {
         GameMatchProgressModel model = new GameMatchProgressModel()
-                .setGameProgressId(request.getGameProgressId())
                 .setRoomId(request.getRoomId())
                 .setGameProgressInfo(request.getGameProgressInfo());
         return gameProgressRepository.createGameProgress(model);

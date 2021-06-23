@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/v1/user")
+@RequestMapping(path = "/v1")
 public class UserController {
 
     private final UserService userService;
@@ -29,7 +29,7 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @GetMapping
+    @PostMapping("/user")
     @ResponseBody
     public UserModel createUser(@RequestBody @NonNull final UserRequest request) {
 

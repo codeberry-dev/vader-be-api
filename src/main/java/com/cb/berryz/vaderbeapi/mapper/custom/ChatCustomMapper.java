@@ -24,11 +24,11 @@ public interface ChatCustomMapper extends ChatMapper {
             "  text," +
             "  create_date" +
             ") values (" +
-            "  #{gameProgress.chatId}," +
-            "  #{gameProgress.roomId}," +
-            "  #{gameProgress.userId}," +
-            "  #{gameProgress.text}," +
-            "  #{gameProgress.createDate},")
+            "  #{chat.chatId}," +
+            "  #{chat.roomId}," +
+            "  #{chat.userId}," +
+            "  #{chat.text}," +
+            "  #{chat.createDate})")
     @Options(useGeneratedKeys=true, keyColumn="chat_id", keyProperty="chatId")
     int customInsert(@Param("chat") Chat chat);
 
