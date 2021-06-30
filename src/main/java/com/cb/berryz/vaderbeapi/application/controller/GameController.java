@@ -51,7 +51,6 @@ public class GameController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @PostMapping("/post")
     @MessageMapping("/postgame")
     @SendTo("/game/match")
     @ResponseBody

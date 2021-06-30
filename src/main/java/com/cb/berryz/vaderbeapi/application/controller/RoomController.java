@@ -72,7 +72,6 @@ public class RoomController {
     @ApiResponses({
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @PutMapping("/room")
     @MessageMapping("/status")
     @SendTo("/game/match")
     @ResponseBody

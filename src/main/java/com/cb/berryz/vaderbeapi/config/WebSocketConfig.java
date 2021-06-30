@@ -12,12 +12,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
+        config.enableSimpleBroker("/game");
+        // FIXME フロントの兼ね合いで修正予定
         config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        // FIXME フロントの兼ね合いで修正予定
         registry.addEndpoint("/gs-guide-websocket").withSockJS();
     }
 
