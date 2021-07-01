@@ -9,10 +9,10 @@ import lombok.experimental.Accessors;
 public class GameMatchProgressRequest {
 
     @ApiModelProperty(value = "ゲーム進行ID", example = "10001")
-    private Integer gameProgressId;
+    private Long gameProgressId;
 
     @ApiModelProperty(value = "部屋ID", example = "10001")
-    private int roomId;
+    private Long roomId;
 
     @ApiModelProperty(value = "ゲーム進行情報", example = "\"{\"user\":\"A\", \"maruBatsu\":\"maru\"}\"")
     private String gameProgressInfo;
@@ -20,7 +20,7 @@ public class GameMatchProgressRequest {
     public GameMatchProgressRequest() {
     }
 
-    public GameMatchProgressRequest(int gameProgressId, int roomId, String gameProgressInfo) {
+    public GameMatchProgressRequest(Long gameProgressId, Long roomId, String gameProgressInfo) {
         this.gameProgressId = gameProgressId;
         this.roomId = roomId;
         this.gameProgressInfo = gameProgressInfo;

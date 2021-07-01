@@ -35,7 +35,7 @@ public class GameUserRepository {
     private GameUser mappingEntity(@NonNull final UserModel model) {
         GameUser entity = new GameUser();
         entity.setGoogleId(model.getGoogleId());
-        entity.setUserId((long) model.getUserId());
+        entity.setUserId(model.getUserId());
         entity.setUserName(model.getUserName());
         entity.setLastUsageDate(new Date());
         entity.setUpdateDate(new Date());

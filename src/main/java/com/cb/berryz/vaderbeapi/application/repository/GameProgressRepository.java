@@ -16,7 +16,7 @@ public class GameProgressRepository {
     private final GameProgressCustomMapper gameProgressCustomMapper;
 
     public int updateGameProgress(
-            @NonNull final long gameProgressId, @NonNull final String gameProgressInfo) {
+            final long gameProgressId, @NonNull final String gameProgressInfo) {
         return this.gameProgressCustomMapper.updateGameProgressInfo(gameProgressId, gameProgressInfo);
     }
 
@@ -33,15 +33,15 @@ public class GameProgressRepository {
 
     private GameMatchProgressModel mappingRoomModel(@NonNull final GameProgress entity) {
         return new GameMatchProgressModel()
-                .setGameProgressId(entity.getGameProgressId().intValue())
-                .setRoomId(entity.getRoomId().intValue())
+                .setGameProgressId(entity.getGameProgressId())
+                .setRoomId(entity.getRoomId())
                 .setGameProgressInfo(entity.getGameProgressInfo());
 
     }
 
     private GameProgress mappingEntityForCreate(@NonNull final GameMatchProgressModel model) {
         GameProgress entity = new GameProgress();
-        entity.setRoomId((long) model.getRoomId());
+        entity.setRoomId(model.getRoomId());
         entity.setGameProgressInfo(model.getGameProgressInfo());
         entity.setUpdateDate(new Date());
         entity.setCreateDate(new Date());

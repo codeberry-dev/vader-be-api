@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 public class RoomStatusUpdateRequest {
 
-    @NotBlank
     @ApiModelProperty(value = "部屋ID", example = "10000")
     private long roomId;
 

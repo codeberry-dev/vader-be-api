@@ -10,9 +10,8 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 public class CreateRoomRequest {
 
-    @NotBlank
     @ApiModelProperty(value = "ゲームID", example = "10001")
-    private int gameId;
+    private long gameId;
 
     @NotBlank
     @ApiModelProperty(value = "公開フラグ", example = "true")
@@ -23,6 +22,6 @@ public class CreateRoomRequest {
     private String chatDisplayType;
 
     @ApiModelProperty(value = "ユーザーID", example = "100")
-    private int userId;
+    private Long userId;
 
 }

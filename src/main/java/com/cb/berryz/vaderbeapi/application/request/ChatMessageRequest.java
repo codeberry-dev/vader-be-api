@@ -9,18 +9,18 @@ import lombok.experimental.Accessors;
 public class ChatMessageRequest {
 
     @ApiModelProperty(value = "部屋ID", example = "5000")
-    private Integer roomId;
+    private Long roomId;
 
     @ApiModelProperty(value = "メッセージ", example = "こんにちは！")
     private String message;
 
     @ApiModelProperty(value = "ユーザーID", example = "1000")
-    private Integer userId;
+    private Long userId;
 
     public ChatMessageRequest() {
     }
 
-    public ChatMessageRequest(Integer roomId, String message, Integer userId) {
+    public ChatMessageRequest(Long roomId, String message, Long userId) {
         this.roomId = roomId;
         this.message = message;
         this.userId = userId;

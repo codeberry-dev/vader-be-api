@@ -1,10 +1,9 @@
 package com.cb.berryz.vaderbeapi.mapper;
 
-import org.mybatis.dynamic.sql.SqlColumn;
-import org.mybatis.dynamic.sql.SqlTable;
-
 import java.sql.JDBCType;
 import java.util.Date;
+import org.mybatis.dynamic.sql.SqlColumn;
+import org.mybatis.dynamic.sql.SqlTable;
 
 public final class RoomDynamicSqlSupport {
     public static final Room room = new Room();

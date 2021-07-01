@@ -6,7 +6,7 @@ CREATE TABLE `room`
     `status`             VARCHAR(2)        NOT NULL COMMENT 'ステータス',
     `public_flag`        BIT(1)            NOT NULL COMMENT '公開フラグ',
     `chat_display_type`  VARCHAR(2)        NOT NULL COMMENT 'チャット表示区分',
-    `user_id`            BIGINT UNSIGNED   NOT NULL COMMENT 'ユーザーID',
+    `user_id`            BIGINT UNSIGNED   COMMENT 'ユーザーID',
     `create_date`        DATETIME          NOT NULL COMMENT '作成日',
     `update_date`        DATETIME          NOT NULL COMMENT '更新日',
     PRIMARY KEY (`room_id`)

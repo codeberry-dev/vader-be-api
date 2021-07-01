@@ -51,6 +51,7 @@ public class RoomRepository {
                 .setGameId(room.getGameId().intValue())
                 .setStatus(room.getStatus())
                 .setPublicFlag(room.getPublicFlag())
+                .setUserId(room.getUserId())
                 .setChatDisplayType(room.getChatDisplayType());
 
     }
